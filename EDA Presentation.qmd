@@ -1,0 +1,93 @@
+---
+title: "EDA Presentation"
+author: "Mingke Tian"
+date: "2024-02-24"
+format:
+  revealjs:
+    theme: solarized
+    transition: slide
+    slide-number: true
+---
+
+## Introduction
+This presentation aims to present all key findings and visualizations from the report with the WordBank dataset. It will include a title slide, a few content slides, and a concluding slide, with summaries of findings for all figures. 
+
+---
+
+# Data & Setup
+```{python setup, include=False}
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+df = pd.read_csv("/Users/mingketian/Desktop/MATH300/wdi.csv")
+df.head()
+```
+
+---
+
+## Visualisations and Findings
+```{python}
+# Distribution of GDP per Capita
+plt.figure(figsize=(10,6))
+sns.histplot(df['gdp_per_capita'], bins=30, kde=True, color='blue')
+plt.title("Distribution of GDP per Capita")
+plt.xlabel("GDP per Capita (USD)")
+plt.ylabel("Frequency")
+plt.show()
+```
+GDP per Capita Distribution
+The distribution is right-skewed, with most countries having low GDP per capita. A few wealthy nations push the upper limit, highlighting global economic disparity. The majority cluster at lower values, suggesting a large income gap between countries.
+
+---
+
+```{python}
+# Inflation Rate Analysis
+plt.figure(figsize=(10,6))
+sns.boxplot(x=df['inflation_rate'], color='orange')
+plt.title("Boxplot of Inflation Rate")
+plt.xlabel("Inflation Rate (%)")
+plt.show()
+```
+Inflation Rate Boxplot
+Inflation varies widely, with many outliers indicating extreme cases. Most countries have inflation rates within a moderate range, but a few experience hyperinflation. The long upper whisker suggests economic instability in some regions.
+
+---
+
+```{python, echo=False}
+# Bar chart of GDP per capita
+df_sorted = df.sort_values('gdp_per_capita', ascending=False)
+plt.figure(figsize=(10,6))
+sns.barplot(data=df_sorted, x='gdp_per_capita', y='country', palette='viridis')
+plt.title("GDP per Capita by Country")
+plt.xlabel("GDP per Capita (USD)")
+plt.ylabel("Country")
+plt.yticks(rotation=0, ha='right')
+plt.show()
+```
+GDP per Capita by Country
+The bar chart shows a high concentration of countries with low GDP per capita, while a few nations have significantly higher values. The skewed distribution highlights global economic inequality, with wealth concentrated in a small number of countries.
+
+---
+
+```{python, echo=False}
+# Scatter plot of inflation rate vs unemployment rate
+plt.figure(figsize=(8,6))
+sns.scatterplot(data=df, x='inflation_rate', y='unemployment_rate', hue='country', palette='coolwarm', s=100, legend=False)
+plt.title("Inflation Rate vs Unemployment Rate")
+plt.xlabel("Inflation Rate (%)")
+plt.ylabel("Unemployment Rate (%)")
+plt.show()
+```
+Inflation Rate vs Unemployment Rate
+The scatter plot reveals no clear correlation between inflation and unemployment, with most countries clustering at low inflation and unemployment rates. However, a few outliers show extreme values, indicating economic instability in certain nations.
+
+---
+
+Summary & Conclusion
+GDP per Capita: Right-skewed distribution with high-income outliers.
+Inflation Rate: Broad range with some extreme values.
+Unemployment Rate: Varied across countries.
+Overall: The analysis highlights diverse economic conditions across the world in 2022.
+Thank you for your attention!
+
+---
