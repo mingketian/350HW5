@@ -9,5 +9,5 @@ This repository contains:
 
 ## GitHub Pages Links
 - **Presentation**: https://mingketian.github.io/350HW5/EDA%20Presentation.html#/title-slide
-- **HTML Report**: 
+- **HTML Report**: https://mingketian.github.io/350HW5/EDA%20Report.html
 
